@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EasyVariable.c" />
+    <ClCompile Include="EasyVariableBase.c" />
     <ClCompile Include="EasyVariableConfig.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EasyVariable.h" />
+    <ClInclude Include="EasyVariableBase.h" />
     <ClInclude Include="EasyVariableConfig.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

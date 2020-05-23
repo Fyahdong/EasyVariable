@@ -9,67 +9,44 @@
 /**********************************************************************************/
 #include "EasyVariable.h"
 
-typedef void (*EasyVariableWrite)(EasyVariableUint32_t u32DataAddress, void* pvodDataValue);
+#include "EasyVariableBase.h"
 
 /**********************************************************************************/
-								/* static functions */
+								/* global functions implement */
 /**********************************************************************************/
-static void EasyVariableInternalWriteInFloat(EasyVariableUint32_t u32DataAddress, void* pvodDataValue)
-{
-	*((EasyVariableFloat_t *)(u32DataAddress)) = *((EasyVariableFloat_t *)(pvodDataValue));
-}
-
-static void EasyVariableInternalWriteInUint32(EasyVariableUint32_t u32DataAddress, void* pvodDataValue)
-{
-	*((EasyVariableUint32_t *)(u32DataAddress)) = *((EasyVariableUint32_t *)(pvodDataValue));
-}
-
-static void EasyVariableInternalWriteInInt32(EasyVariableUint32_t u32DataAddress, void* pvodDataValue)
-{
-	*((EasyVariableInt32_t *)(u32DataAddress)) = *((EasyVariableInt32_t *)(pvodDataValue));
-}
-
-static void EasyVariableInternalWriteInUint16(EasyVariableUint32_t u32DataAddress, void* pvodDataValue)
-{
-	*((EasyVariableUint16_t *)(u32DataAddress)) = *((EasyVariableUint16_t *)(pvodDataValue));
-}
-
-static void EasyVariableInternalWriteInInt16(EasyVariableUint32_t u32DataAddress, void* pvodDataValue)
-{
-	*((EasyVariableInt16_t *)(u32DataAddress)) = *((EasyVariableInt16_t *)(pvodDataValue));
-}
-
-static void EasyVariableInternalWriteInType(EasyVariableUint32_t u32DataIndex, void *pvodDataValue, EasyVariableDataTypeEnum teDataType)
+/*
+ * @function:	EasyVariableWirte
+ * data write application function
+ * @param[in]	u32DataIndex			the index of data in data matrix
+ * @param[in]	pvodDataValue			pointer to the value(source)
+ * @param[out]	None
+ * @retval		None
+ */
+void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void *pvodDataValue)
 {
 	/* 1 error check */
 	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
 	EasyVariable_Assert((pvodDataValue == NULL));
 
-	switch (teDataType)
-	{
-		case teEasyVairableFloat_t:
-		{
-			*(EasyVariableFloat_t*)(gtsEasyVariableDataArray[u32DataIndex].u32DataAddress) = *(EasyVariableFloat_t*)(pvodDataValue);
-		}
-		break;
-
-		case teEasyVariableUint32_t:
-		{
-			
-		}
-	}
+	/* 2 run function */
+	EasyVariableBaseWrite(u32DataIndex, pvodDataValue);
 }
 
-/**********************************************************************************/
-								/* global functions */
-/**********************************************************************************/
-void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void *pvodDataValue)
+/*
+ * @function:	EasyVariableRead
+ * data read application function
+ * @param[in]	u32DataIndex			the index of data in data matrix
+ * @param[in]	pvodDataValue			pointer to the value(destination)
+ * @param[out]	None
+ * @retval		None
+ */
+void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
 {
 	/* 1 error check */
 	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
-	EasyVariable_Assert((pvodDataValue == NULL))
+	EasyVariable_Assert((pvodDataValue == NULL));
 
-
+	/* 2 run function */
+	EasyVariableBaseRead(u32DataIndex, pvodDataValue);
 }
-
 

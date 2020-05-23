@@ -24,12 +24,18 @@
     <ClCompile Include="EasyVariableConfig.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="EasyVariableBase.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EasyVariable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="EasyVariableConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyVariableBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
