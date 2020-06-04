@@ -12,6 +12,6 @@ static EasyVariableInt8_t s8Test = 0;
 
 EasyVariableDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Number] =
 {
-	{.u32DataAddress = (EasyVariableUint32_t)(&f32Test), .teDataType = teEasyVairableFloat_t, .s8DataDescription = "float", .u32DataIndex = 0},
-	{.u32DataAddress = (EasyVariableUint32_t)(&u32Test), .teDataType = teEasyVariableUint32_t, .s8DataDescription = "uint32_t", .u32DataIndex = 1}
+	{.pvDataAddress = (void*)(&f32Test), .teDataType = teEasyVairableFloat_t, .s8DataDescription = "float", .u32DataIndex = 0},
+	{.pvDataAddress = (void*)(&u32Test), .teDataType = teEasyVariableUint32_t, .s8DataDescription = "uint32_t", .u32DataIndex = 1}
 };

@@ -25,9 +25,6 @@ typedef signed short EasyVariableInt16_t;
 typedef unsigned char EasyVariableUint8_t;
 typedef signed char EasyVariableInt8_t;
 
-typedef void (*pfEasyVariableWriteFunction)(EasyVariableUint32_t u32DataAddress, void* pvodDataValue);
-typedef void (*pfEasyVariableReadFunction)(EasyVariableUint32_t u32DataAddress, void* pvodDataValue);
-
 /**********************************************************************************/
 								/* enum type */
 /**********************************************************************************/
@@ -54,21 +51,12 @@ typedef enum
 typedef struct
 {
 
-	EasyVariableUint32_t		u32DataAddress;										/* data address */
+	void*						pvDataAddress;										/* data address */
 	EasyVariableDataTypeEnum	teDataType;											/* data type */
 	EasyVariableInt8_t			s8DataDescription[EasyVariable_Name_Max_Length];	/* data description name */
 	EasyVariableUint32_t		u32DataIndex;										/* data index in data array */
 
 }EasyVariableDataStruct;
-
-/* variable write read port */
-typedef struct
-{
-
-	pfEasyVariableWriteFunction pfWrite[teEasyVairableMaxTypeNumber + 1];
-	pfEasyVariableReadFunction pfRead[teEasyVairableMaxTypeNumber + 1];
-
-}EasyVariableReadWriteFunctionStruct;
 
 /**********************************************************************************/
 								/* variable declaration */

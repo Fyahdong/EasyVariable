@@ -17,7 +17,7 @@
 /**********************************************************************************/
 								/* config macro */
 /**********************************************************************************/
-#define EasyVariable_Name_Max_Length				(8)
+#define EasyVariable_Name_Max_Length				(32)
 #define EasyVariable_Data_Max_Number				(128)
 
 #endif

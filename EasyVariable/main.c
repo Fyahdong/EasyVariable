@@ -7,17 +7,18 @@ int main(void)
 	EasyVariableUint32_t u32Test = 0;
 	EasyVariableFloat_t f32Test = 0;
 	EasyVariableInt32_t f32TestHandle = 0;
+	EasyVariableInt32_t s32TestHandle = 0;
 
-	f32TestHandle = EasyVariableGetHandle("float_t");
+	s32TestHandle = EasyVariableGetHandle("uint32_t");
 
-	EasyVariableRead(f32TestHandle, &f32Test);
-	printf("f32Test = %lf\n", f32Test);
+	EasyVariableRead(s32TestHandle, &u32Test);
+	printf("f32Test = %d\n", u32Test);
 
-	f32Test = 3.12312312;
-	EasyVariableWirte(0, &f32Test);
-	f32Test = 0;
-	EasyVariableRead(0, &f32Test);
-	printf("f32Test = %lf\n", f32Test);
+	u32Test = 4219312;
+	EasyVariableWirte(s32TestHandle, &u32Test);
+	u32Test = 0;
+	EasyVariableRead(s32TestHandle, &u32Test);
+	printf("f32Test = %d\n", u32Test);
 
 	return 0;
 }
