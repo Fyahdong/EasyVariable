@@ -8,6 +8,7 @@
 								/* include headers */
 /**********************************************************************************/
 #include "EasyVariableBase.h"
+#include "string.h"
 
 /**********************************************************************************/
 								/* function declaration */
@@ -240,6 +241,29 @@ static void EasyVariableBaseReadInInt8(EasyVariableUint32_t u32DataAddress, void
 	*((EasyVariableInt8_t*)(pvodDataValue)) = *((EasyVariableInt8_t*)(u32DataAddress));
 }
 
+/*
+ * @function:	EasyVariableBaseFindVariable
+ * find data handler in variable array
+ * @param[in]	ps8Description		data description
+ * @param[out]	None
+ * @retval		EasyVariableInt32_t		data index in variable array, if not find, return -1
+ */
+static EasyVariableInt32_t EasyVariableBaseFindVariable(EasyVariableInt8_t* ps8Description)
+{
+	EasyVariableInt32_t s32DataIndexFind = -1;
+
+	for (EasyVariableUint32_t u32DataIndex = 0; u32DataIndex < EasyVariable_Data_Max_Number; u32DataIndex++)
+	{
+		if (strcmp(ps8Description, gtsEasyVariableDataArray[u32DataIndex].s8DataDescription) == 0)
+		{
+			s32DataIndexFind = u32DataIndex;
+			break;
+		}
+	}
+
+	return s32DataIndexFind;
+}
+
 /**********************************************************************************/
 								/* global functions implement */
 /**********************************************************************************/
@@ -283,4 +307,16 @@ void EasyVariableBaseRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue
 
 	/* 2 get value from data */
 	tsEasyVariableFunction.pfRead[u32DataWriteFuntionType](u32DataAddress, pvodDataValue);
+}
+
+/*
+ * @function:	EasyVariableBaseGetHandle
+ * find data handler in variable array
+ * @param[in]	ps8Description		data description
+ * @param[out]	None
+ * @retval		EasyVariableInt32_t		data index in variable array, if not find, return -1
+ */
+EasyVariableInt32_t EasyVariableBaseGetHandle(EasyVariableInt8_t* ps8Description)
+{
+	return EasyVariableBaseFindVariable(ps8Description);
 }

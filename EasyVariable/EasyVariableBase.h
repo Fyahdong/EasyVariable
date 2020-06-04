@@ -80,5 +80,6 @@ extern EasyVariableDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Num
 /**********************************************************************************/
 void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
 void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
+EasyVariableInt32_t EasyVariableBaseGetHandle(EasyVariableInt8_t* ps8Description);
 
 #endif

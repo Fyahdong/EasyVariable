@@ -50,3 +50,17 @@ void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
 	EasyVariableBaseRead(u32DataIndex, pvodDataValue);
 }
 
+/*
+ * @function:	EasyVariableGetHandle
+ * get variable handle
+ * @param[in]	ps8Description		data description
+ * @param[out]	None
+ * @retval		EasyVariableInt32_t		data handle, if not find, return -1
+ */
+EasyVariableInt32_t EasyVariableGetHandle(EasyVariableInt8_t* ps8Description)
+{
+	EasyVariable_Assert((ps8Description == NULL));
+
+	return EasyVariableBaseGetHandle(ps8Description);
+}
+

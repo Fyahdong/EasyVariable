@@ -24,5 +24,6 @@
 /**********************************************************************************/
 void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
 void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
+EasyVariableInt32_t EasyVariableGetHandle(EasyVariableInt8_t * ps8Description);
 
 #endif

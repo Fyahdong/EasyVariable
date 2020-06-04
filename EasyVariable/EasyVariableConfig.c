@@ -2,8 +2,8 @@
 
 /* todo:Ôö¼Ó¶ÁĞ´¿ØÖÆ */
 
-static EasyVariableFloat_t f32Test = 0;
-static EasyVariableUint32_t u32Test = 0;
+static EasyVariableFloat_t f32Test = 101.2;
+static EasyVariableUint32_t u32Test = 3212;
 static EasyVariableInt32_t s32Test = 0;
 static EasyVariableUint16_t u16Test = 0;
 static EasyVariableInt16_t s16Test = 0;
