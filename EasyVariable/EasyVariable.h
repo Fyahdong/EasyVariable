@@ -15,6 +15,7 @@
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
+void EasyVariableInstallConfigData(EasyVariableBaseConfigDataStruct* ptsConfigData);
 void EasyVariableWriteWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
 void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
 EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue);

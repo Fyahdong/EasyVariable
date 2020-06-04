@@ -9,11 +9,21 @@
 /**********************************************************************************/
 #include "EasyVariable.h"
 
-#include "EasyVariableBase.h"
-
 /**********************************************************************************/
 								/* global functions implement */
 /**********************************************************************************/
+/*
+ * @function:	EasyVariableInstallConfigData
+ * install config data information
+ * @param[in]	ptsConfigData		pointer to config data
+ * @param[out]	None
+ * @retval		None
+ */
+void EasyVariableInstallConfigData(EasyVariableBaseConfigDataStruct* ptsConfigData)
+{
+	EasyVariableBaseConfigInstall(ptsConfigData);
+}
+
 /*
  * @function:	EasyVariableGetHandle
  * get variable handle
@@ -26,25 +36,42 @@ EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t* ps8Descrip
 	return EasyVariableBaseGetHandle(ps8Description);
 }
 
+/*
+ * @function:	EasyVariableWriteWithHandle
+ * write operation with variable handle
+ * @param[in]	s32Handle		variable handle
+ * @param[in]	pvodDataValue	data value to be written(source)
+ * @param[out]	None
+ * @retval		None
+ */
 void EasyVariableWriteWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue)
 {
 	EasyVariableBaseWrite(s32Handle, pvodDataValue);
 }
 
+/*
+ * @function:	EasyVariableReadWithHandle
+ * read operation with variable handle
+ * @param[in]	s32Handle		variable handle
+ * @param[in]	pvodDataValue	pointer to store read data value(destination)
+ * @param[out]	None
+ * @retval		None
+ */
 void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue)
 {
 	EasyVariableBaseRead(s32Handle, pvodDataValue);
 }
 
 /*
- * @function:	EasyVariableWirte
- * data write application function
- * @param[in]	u32DataIndex			the index of data in data matrix
+ * @function:	EasyVariableWriteWithName
+ * data write application function with variable description
+ * @param[in]	ps8Description			variable description
  * @param[in]	pvodDataValue			pointer to the value(source)
  * @param[out]	None
- * @retval		None
+ * @retval		EasyVariableBaseInt8_t		-1		can't find variable in table
+											0		ok
  */
-EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void *pvodDataValue)
+EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue)
 {
 	EasyVariableBaseInt8_t s8Status = -1;
 	EasyVariableBaseInt32_t s32DataHandle = 0;
@@ -56,6 +83,7 @@ EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Desc
 	{
 		return s8Status;
 	}
+	s8Status = 0;
 
 	/* 2 run function */
 	EasyVariableWriteWithHandle(s32DataHandle, pvodDataValue);
@@ -66,10 +94,11 @@ EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Desc
 /*
  * @function:	EasyVariableRead
  * data read application function
- * @param[in]	u32DataIndex			the index of data in data matrix
+ * @param[in]	ps8Description			variable description
  * @param[in]	pvodDataValue			pointer to the value(destination)
  * @param[out]	None
- * @retval		None
+ * @retval		EasyVariableBaseInt8_t		-1		can't find variable in table
+											0		ok
  */
 EasyVariableBaseInt8_t EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue)
 {
@@ -83,6 +112,7 @@ EasyVariableBaseInt8_t EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Descr
 	{
 		return s8Status;
 	}
+	s8Status = 0;
 
 	/* 2 run function */
 	EasyVariableReadWithHandle(s32DataHandle, pvodDataValue);

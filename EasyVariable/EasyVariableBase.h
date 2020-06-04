@@ -63,6 +63,15 @@ typedef struct
 
 }EasyVariableBaseDataStruct;
 
+/* config data information */
+typedef struct
+{
+	
+	EasyVariableBaseDataStruct* ptsConfigAddress;
+	EasyVariableBaseInt32_t s32ConfigSize;
+
+}EasyVariableBaseConfigDataStruct;
+
 /**********************************************************************************/
 								/* variable declaration */
 /**********************************************************************************/
@@ -74,5 +83,6 @@ extern const EasyVariableBaseDataStruct gtsEasyVariableDataArray[EasyVariable_Da
 void EasyVariableBaseWrite(EasyVariableBaseInt32_t u32DataIndex, void* pvodDataValue);
 void EasyVariableBaseRead(EasyVariableBaseInt32_t u32DataIndex, void* pvodDataValue);
 EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Description);
+void EasyVariableBaseConfigInstall(EasyVariableBaseConfigDataStruct* ptsConfigData);
 
 #endif

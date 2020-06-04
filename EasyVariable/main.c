@@ -9,17 +9,23 @@ int main(void)
 
 	EasyVariableBaseInt32_t s32TestHandle = 0;
 
-	s32TestHandle = EasyVariableGetHandle("uint32_t");
-	EasyVariableReadWithHandle(s32TestHandle, &u32Test);
-	//EasyVariableReadWithName("uint32_t", &u32Test);
-	printf("f32Test = %d\n", u32Test);
+	EasyVariableBaseConfigDataStruct tsConfigData = { 0 };
 
-	u32Test = 4219312;
-	EasyVariableWriteWithHandle(s32TestHandle, &u32Test);
-	//EasyVariableWriteWithName("uint32_t", &u32Test);
-	u32Test = 0;
-	EasyVariableReadWithHandle(s32TestHandle, &u32Test);
-	printf("f32Test = %d\n", u32Test);
+	tsConfigData.ptsConfigAddress = gtsEasyVariableDataArray;
+	tsConfigData.s32ConfigSize = sizeof(gtsEasyVariableDataArray) / sizeof(EasyVariableBaseDataStruct);
+
+	EasyVariableInstallConfigData(&tsConfigData);
+
+	//s32TestHandle = EasyVariableGetHandle("uint32_t");
+	//EasyVariableReadWithHandle(s32TestHandle, &u32Test);
+	EasyVariableReadWithName("float", &f32Test);
+	printf("f32Test = %lf\n", f32Test);
+
+	f32Test = 4219312;
+	EasyVariableWriteWithName("float", &f32Test);
+	f32Test = 0;
+	EasyVariableReadWithName("float", &f32Test);
+	printf("f32Test = %lf\n", f32Test);
 
 	return 0;
 }

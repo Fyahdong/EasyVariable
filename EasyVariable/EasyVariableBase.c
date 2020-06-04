@@ -17,8 +17,7 @@
 /**********************************************************************************/
 								/* static variables */
 /**********************************************************************************/
-
-static EasyVariableBaseUint8_t sgu8DataTypeSizeArray[teEasyVairableBaseMaxTypeNumber + 1] =
+const static EasyVariableBaseUint8_t sgu8DataTypeSizeArray[teEasyVairableBaseMaxTypeNumber + 1] =
 {
 	sizeof(EasyVariableBaseFloat_t),
 	sizeof(EasyVariableBaseUint32_t),
@@ -27,6 +26,13 @@ static EasyVariableBaseUint8_t sgu8DataTypeSizeArray[teEasyVairableBaseMaxTypeNu
 	sizeof(EasyVariableBaseInt16_t),
 	sizeof(EasyVariableBaseUint8_t),
 	sizeof(EasyVariableBaseInt8_t)
+};
+
+const static EasyVariableBaseDataStruct sgtsInitialConfig = { 0 };			/* just to initialize */
+EasyVariableBaseConfigDataStruct sgtsEasyVariableBaseConfig =
+{
+	.ptsConfigAddress = (&sgtsInitialConfig),
+	.s32ConfigSize = (sizeof(sgtsInitialConfig) / sizeof(EasyVariableBaseDataStruct))
 };
 
 /**********************************************************************************/
@@ -62,7 +68,7 @@ static EasyVariableBaseInt32_t EasyVariableBaseFindVariable(EasyVariableBaseInt8
 		return s32DataIndexFind;
 	}
 
-	for (EasyVariableBaseUint32_t u32DataIndex = 0; u32DataIndex < EasyVariable_Data_Max_Number; u32DataIndex++)
+	for (EasyVariableBaseUint32_t u32DataIndex = 0; u32DataIndex < sgtsEasyVariableBaseConfig.s32ConfigSize; u32DataIndex++)
 	{
 		if (strcmp(ps8Description, gtsEasyVariableDataArray[u32DataIndex].s8DataDescription) == 0)
 		{
@@ -91,12 +97,12 @@ void EasyVariableBaseWrite(EasyVariableBaseInt32_t s32DataIndex, void* pvodDataV
 	EasyVariableBaseUint32_t u32DataType = 0;
 
 	/* 1 error check */
-	EasyVariableBase_Assert(((s32DataIndex >= EasyVariable_Data_Max_Number) || (s32DataIndex < 0)));
+	EasyVariableBase_Assert(((s32DataIndex >= sgtsEasyVariableBaseConfig.s32ConfigSize) || (s32DataIndex < 0)));
 	EasyVariableBase_Assert((pvodDataValue == NULL));
 
 	/* 2 get information of variable */
-	pvDataAddress = gtsEasyVariableDataArray[s32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[s32DataIndex].teDataType);
+	pvDataAddress = sgtsEasyVariableBaseConfig.ptsConfigAddress[s32DataIndex].pvDataAddress;
+	u32DataType = (EasyVariableBaseUint32_t)(sgtsEasyVariableBaseConfig.ptsConfigAddress[s32DataIndex].teDataType);
 
 	/* 2 write value into data */
 	EasyVariableBaseMemcpy(pvDataAddress, pvodDataValue, sgu8DataTypeSizeArray[u32DataType]);
@@ -116,12 +122,12 @@ void EasyVariableBaseRead(EasyVariableBaseInt32_t s32DataIndex, void* pvodDataVa
 	EasyVariableBaseUint32_t u32DataType = 0;
 
 	/* 1 error check */
-	EasyVariableBase_Assert(((s32DataIndex >= EasyVariable_Data_Max_Number) || (s32DataIndex < 0)));
+	EasyVariableBase_Assert(((s32DataIndex >= sgtsEasyVariableBaseConfig.s32ConfigSize) || (s32DataIndex < 0)));
 	EasyVariableBase_Assert((pvodDataValue == NULL));
 
 	/* 1 get information of variable */
-	pvDataAddress = gtsEasyVariableDataArray[s32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[s32DataIndex].teDataType);
+	pvDataAddress = sgtsEasyVariableBaseConfig.ptsConfigAddress[s32DataIndex].pvDataAddress;
+	u32DataType = (EasyVariableBaseUint32_t)(sgtsEasyVariableBaseConfig.ptsConfigAddress[s32DataIndex].teDataType);
 
 	/* 2 get value from data */
 	EasyVariableBaseMemcpy(pvodDataValue, pvDataAddress, sgu8DataTypeSizeArray[u32DataType]);
@@ -139,4 +145,19 @@ EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Des
 	EasyVariableBase_Assert((ps8Description == NULL));
 
 	return EasyVariableBaseFindVariable(ps8Description);
+}
+
+/*
+ * @function:	EasyVariableBaseConfigInstall
+ * install config data information
+ * @param[in]	ptsConfigData		pointer to config data
+ * @param[out]	None
+ * @retval		None
+ */
+void EasyVariableBaseConfigInstall(EasyVariableBaseConfigDataStruct* ptsConfigData)
+{
+	EasyVariableBase_Assert((ptsConfigData == NULL));
+	EasyVariableBase_Assert((ptsConfigData->ptsConfigAddress == NULL));
+
+	sgtsEasyVariableBaseConfig = *ptsConfigData;
 }
