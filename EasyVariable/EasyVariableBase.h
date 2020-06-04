@@ -61,7 +61,7 @@ typedef struct
 /**********************************************************************************/
 								/* variable declaration */
 /**********************************************************************************/
-extern EasyVariableDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Number];
+extern const EasyVariableDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Number];
 
 /**********************************************************************************/
 								/* function declaration */
