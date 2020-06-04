@@ -22,8 +22,8 @@
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
-void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
-void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
-EasyVariableInt32_t EasyVariableGetHandle(EasyVariableInt8_t * ps8Description);
+void EasyVariableWirte(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+void EasyVariableRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t * ps8Description);
 
 #endif

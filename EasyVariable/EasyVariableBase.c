@@ -17,15 +17,16 @@
 /**********************************************************************************/
 								/* static variables */
 /**********************************************************************************/
-static EasyVariableUint8_t sgu8DataTypeSizeArray[teEasyVairableMaxTypeNumber + 1] =
+
+static EasyVariableBaseUint8_t sgu8DataTypeSizeArray[teEasyVairableBaseMaxTypeNumber + 1] =
 {
-	sizeof(EasyVariableFloat_t),
-	sizeof(EasyVariableUint32_t),
-	sizeof(EasyVariableInt32_t),
-	sizeof(EasyVariableUint16_t),
-	sizeof(EasyVariableInt16_t),
-	sizeof(EasyVariableUint8_t),
-	sizeof(EasyVariableInt8_t)
+	sizeof(EasyVariableBaseFloat_t),
+	sizeof(EasyVariableBaseUint32_t),
+	sizeof(EasyVariableBaseInt32_t),
+	sizeof(EasyVariableBaseUint16_t),
+	sizeof(EasyVariableBaseInt16_t),
+	sizeof(EasyVariableBaseUint8_t),
+	sizeof(EasyVariableBaseInt8_t)
 };
 
 /**********************************************************************************/
@@ -40,7 +41,7 @@ static EasyVariableUint8_t sgu8DataTypeSizeArray[teEasyVairableMaxTypeNumber + 1
  * @param[out]	None
  * @retval		None
  */
-static void EasyVariableBaseMemcpy(void* pvDestination, void* pvSource, EasyVariableUint32_t u32Size)
+static void EasyVariableBaseMemcpy(void* pvDestination, void* pvSource, EasyVariableBaseUint32_t u32Size)
 {
 	memcpy(pvDestination, pvSource, u32Size);
 }
@@ -52,11 +53,16 @@ static void EasyVariableBaseMemcpy(void* pvDestination, void* pvSource, EasyVari
  * @param[out]	None
  * @retval		EasyVariableInt32_t		data index in variable array, if not find, return -1
  */
-static EasyVariableInt32_t EasyVariableBaseFindVariable(EasyVariableInt8_t* ps8Description)
+static EasyVariableBaseInt32_t EasyVariableBaseFindVariable(EasyVariableBaseInt8_t* ps8Description)
 {
-	EasyVariableInt32_t s32DataIndexFind = -1;
+	EasyVariableBaseInt32_t s32DataIndexFind = -1;
 
-	for (EasyVariableUint32_t u32DataIndex = 0; u32DataIndex < EasyVariable_Data_Max_Number; u32DataIndex++)
+	if (strlen(ps8Description) >= EasyVariable_Name_Max_Length)
+	{
+		return s32DataIndexFind;
+	}
+
+	for (EasyVariableBaseUint32_t u32DataIndex = 0; u32DataIndex < EasyVariable_Data_Max_Number; u32DataIndex++)
 	{
 		if (strcmp(ps8Description, gtsEasyVariableDataArray[u32DataIndex].s8DataDescription) == 0)
 		{
@@ -79,14 +85,14 @@ static EasyVariableInt32_t EasyVariableBaseFindVariable(EasyVariableInt8_t* ps8D
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableBaseWrite(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
 {
 	void* pvDataAddress = 0;
-	EasyVariableUint32_t u32DataType = 0;
+	EasyVariableBaseUint32_t u32DataType = 0;
 
 	/* 1 get information of variable */
 	pvDataAddress = gtsEasyVariableDataArray[u32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
+	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
 
 	/* 2 write value into data */
 	EasyVariableBaseMemcpy(pvDataAddress, pvodDataValue, sgu8DataTypeSizeArray[u32DataType]);
@@ -100,14 +106,14 @@ void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValu
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableBaseRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableBaseRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
 {
 	void* pvDataAddress = 0;
-	EasyVariableUint32_t u32DataType = 0;
+	EasyVariableBaseUint32_t u32DataType = 0;
 
 	/* 1 get information of variable */
 	pvDataAddress = gtsEasyVariableDataArray[u32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
+	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
 
 	/* 2 get value from data */
 	EasyVariableBaseMemcpy(pvodDataValue, pvDataAddress, sgu8DataTypeSizeArray[u32DataType]);
@@ -120,7 +126,7 @@ void EasyVariableBaseRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue
  * @param[out]	None
  * @retval		EasyVariableInt32_t		data index in variable array, if not find, return -1
  */
-EasyVariableInt32_t EasyVariableBaseGetHandle(EasyVariableInt8_t* ps8Description)
+EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Description)
 {
 	return EasyVariableBaseFindVariable(ps8Description);
 }

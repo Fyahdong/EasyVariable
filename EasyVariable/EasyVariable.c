@@ -22,7 +22,7 @@
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void *pvodDataValue)
+void EasyVariableWirte(EasyVariableBaseUint32_t u32DataIndex, void *pvodDataValue)
 {
 	/* 1 error check */
 	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
@@ -40,7 +40,7 @@ void EasyVariableWirte(EasyVariableUint32_t u32DataIndex, void *pvodDataValue)
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
 {
 	/* 1 error check */
 	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
@@ -57,7 +57,7 @@ void EasyVariableRead(EasyVariableUint32_t u32DataIndex, void* pvodDataValue)
  * @param[out]	None
  * @retval		EasyVariableInt32_t		data handle, if not find, return -1
  */
-EasyVariableInt32_t EasyVariableGetHandle(EasyVariableInt8_t* ps8Description)
+EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t* ps8Description)
 {
 	EasyVariable_Assert((ps8Description == NULL));
 

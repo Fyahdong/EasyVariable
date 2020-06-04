@@ -4,10 +4,10 @@
 
 int main(void)
 {
-	EasyVariableUint32_t u32Test = 0;
-	EasyVariableFloat_t f32Test = 0;
-	EasyVariableInt32_t f32TestHandle = 0;
-	EasyVariableInt32_t s32TestHandle = 0;
+	EasyVariableBaseUint32_t u32Test = 0;
+	EasyVariableBaseFloat_t f32Test = 0;
+	EasyVariableBaseInt32_t f32TestHandle = 0;
+	EasyVariableBaseInt32_t s32TestHandle = 0;
 
 	s32TestHandle = EasyVariableGetHandle("uint32_t");
 

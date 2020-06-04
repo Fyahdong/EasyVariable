@@ -17,13 +17,13 @@
 /**********************************************************************************/
 								/* variable type */
 /**********************************************************************************/
-typedef float EasyVariableFloat_t;
-typedef unsigned int EasyVariableUint32_t;
-typedef signed int EasyVariableInt32_t;
-typedef unsigned short EasyVariableUint16_t;
-typedef signed short EasyVariableInt16_t;
-typedef unsigned char EasyVariableUint8_t;
-typedef signed char EasyVariableInt8_t;
+typedef float EasyVariableBaseFloat_t;
+typedef unsigned int EasyVariableBaseUint32_t;
+typedef signed int EasyVariableBaseInt32_t;
+typedef unsigned short EasyVariableBaseUint16_t;
+typedef signed short EasyVariableBaseInt16_t;
+typedef unsigned char EasyVariableBaseUint8_t;
+typedef signed char EasyVariableBaseInt8_t;
 
 /**********************************************************************************/
 								/* enum type */
@@ -32,17 +32,17 @@ typedef signed char EasyVariableInt8_t;
 typedef enum
 {
 
-	teEasyVairableFloat_t = 0,
-	teEasyVariableUint32_t = 1,
-	teEasyVariableInt32_t = 2,
-	teEasyVariableUint16_t = 3,
-	teEasyVariableInt16_t = 4,
-	teEasyVariableUint8_t = 5,
-	teEasyVariableInt8_t = 6,
+	teEasyVairableBaseFloat_t = 0,
+	teEasyVariableBaseUint32_t = 1,
+	teEasyVariableBaseInt32_t = 2,
+	teEasyVariableBaseUint16_t = 3,
+	teEasyVariableBaseInt16_t = 4,
+	teEasyVariableBaseUint8_t = 5,
+	teEasyVariableBaseInt8_t = 6,
 
-	teEasyVairableMaxTypeNumber = 6
+	teEasyVairableBaseMaxTypeNumber = 6
 
-}EasyVariableDataTypeEnum;
+}EasyVariableBaseDataTypeEnum;
 
 /**********************************************************************************/
 								/* structure type */
@@ -51,23 +51,23 @@ typedef enum
 typedef struct
 {
 
-	void*						pvDataAddress;										/* data address */
-	EasyVariableDataTypeEnum	teDataType;											/* data type */
-	EasyVariableInt8_t			s8DataDescription[EasyVariable_Name_Max_Length];	/* data description name */
-	EasyVariableUint32_t		u32DataIndex;										/* data index in data array */
+	void*							pvDataAddress;										/* data address */
+	EasyVariableBaseDataTypeEnum	teDataType;											/* data type */
+	EasyVariableBaseInt8_t			s8DataDescription[EasyVariable_Name_Max_Length];	/* data description name */
+	EasyVariableBaseUint32_t		u32DataIndex;										/* data index in data array */
 
-}EasyVariableDataStruct;
+}EasyVariableBaseDataStruct;
 
 /**********************************************************************************/
 								/* variable declaration */
 /**********************************************************************************/
-extern const EasyVariableDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Number];
+extern const EasyVariableBaseDataStruct gtsEasyVariableDataArray[EasyVariable_Data_Max_Number];
 
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
-void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
-void EasyVariableBaseWrite(EasyVariableUint32_t u32DataIndex, void* pvodDataValue);
-EasyVariableInt32_t EasyVariableBaseGetHandle(EasyVariableInt8_t* ps8Description);
+void EasyVariableBaseWrite(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+void EasyVariableBaseRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Description);
 
 #endif
