@@ -44,15 +44,23 @@ void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDat
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void *pvodDataValue)
+EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void *pvodDataValue)
 {
+	EasyVariableBaseInt8_t s8Status = -1;
 	EasyVariableBaseInt32_t s32DataHandle = 0;
 
 	/* 1 get handle of variable */
 	s32DataHandle = EasyVariableGetHandle(ps8Description);
 
+	if (s32DataHandle == -1)
+	{
+		return s8Status;
+	}
+
 	/* 2 run function */
 	EasyVariableWriteWithHandle(s32DataHandle, pvodDataValue);
+
+	return s8Status;
 }
 
 /*
@@ -63,15 +71,23 @@ void EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void *pvo
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue)
+EasyVariableBaseInt8_t EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue)
 {
+	EasyVariableBaseInt8_t s8Status = -1;
 	EasyVariableBaseInt32_t s32DataHandle = 0;
 
 	/* 1 get handle of variable */
 	s32DataHandle = EasyVariableGetHandle(ps8Description);
 
+	if (s32DataHandle == -1)
+	{
+		return s8Status;
+	}
+
 	/* 2 run function */
 	EasyVariableReadWithHandle(s32DataHandle, pvodDataValue);
+
+	return s8Status;
 }
 
 

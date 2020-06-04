@@ -9,20 +9,16 @@
 /**********************************************************************************/
 								/* include headers */
 /**********************************************************************************/
-#include "stdio.h"
-
 #include "EasyVariableBase.h"
 #include "EasyVariableConfig.h"
-
-
 
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
 void EasyVariableWriteWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
 void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
-void EasyVariableWriteWithName(EasyVariableBaseInt8_t * ps8Description, void* pvodDataValue);
-void EasyVariableReadWithName(EasyVariableBaseInt8_t * ps8Description, void* pvodDataValue);
-EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t * ps8Description);
+EasyVariableBaseInt8_t EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue);
+EasyVariableBaseInt8_t EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue);
+EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t* ps8Description);
 
 #endif
