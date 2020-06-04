@@ -15,6 +15,28 @@
 								/* global functions implement */
 /**********************************************************************************/
 /*
+ * @function:	EasyVariableGetHandle
+ * get variable handle
+ * @param[in]	ps8Description		data description
+ * @param[out]	None
+ * @retval		EasyVariableInt32_t		data handle, if not find, return -1
+ */
+EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t* ps8Description)
+{
+	return EasyVariableBaseGetHandle(ps8Description);
+}
+
+void EasyVariableWriteWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue)
+{
+	EasyVariableBaseWrite(s32Handle, pvodDataValue);
+}
+
+void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue)
+{
+	EasyVariableBaseRead(s32Handle, pvodDataValue);
+}
+
+/*
  * @function:	EasyVariableWirte
  * data write application function
  * @param[in]	u32DataIndex			the index of data in data matrix
@@ -22,14 +44,15 @@
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableWirte(EasyVariableBaseUint32_t u32DataIndex, void *pvodDataValue)
+void EasyVariableWriteWithName(EasyVariableBaseInt8_t* ps8Description, void *pvodDataValue)
 {
-	/* 1 error check */
-	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
-	EasyVariable_Assert((pvodDataValue == NULL));
+	EasyVariableBaseInt32_t s32DataHandle = 0;
+
+	/* 1 get handle of variable */
+	s32DataHandle = EasyVariableGetHandle(ps8Description);
 
 	/* 2 run function */
-	EasyVariableBaseWrite(u32DataIndex, pvodDataValue);
+	EasyVariableWriteWithHandle(s32DataHandle, pvodDataValue);
 }
 
 /*
@@ -40,27 +63,16 @@ void EasyVariableWirte(EasyVariableBaseUint32_t u32DataIndex, void *pvodDataValu
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableReadWithName(EasyVariableBaseInt8_t* ps8Description, void* pvodDataValue)
 {
-	/* 1 error check */
-	EasyVariable_Assert((u32DataIndex >= EasyVariable_Data_Max_Number));
-	EasyVariable_Assert((pvodDataValue == NULL));
+	EasyVariableBaseInt32_t s32DataHandle = 0;
+
+	/* 1 get handle of variable */
+	s32DataHandle = EasyVariableGetHandle(ps8Description);
 
 	/* 2 run function */
-	EasyVariableBaseRead(u32DataIndex, pvodDataValue);
+	EasyVariableReadWithHandle(s32DataHandle, pvodDataValue);
 }
 
-/*
- * @function:	EasyVariableGetHandle
- * get variable handle
- * @param[in]	ps8Description		data description
- * @param[out]	None
- * @retval		EasyVariableInt32_t		data handle, if not find, return -1
- */
-EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t* ps8Description)
-{
-	EasyVariable_Assert((ps8Description == NULL));
 
-	return EasyVariableBaseGetHandle(ps8Description);
-}
 

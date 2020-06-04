@@ -14,16 +14,15 @@
 #include "EasyVariableBase.h"
 #include "EasyVariableConfig.h"
 
-/**********************************************************************************/
-								/* macro */
-/**********************************************************************************/
-#define EasyVariable_Assert(bFlag, Return)			if(bFlag){return Return;}
+
 
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
-void EasyVariableWirte(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
-void EasyVariableRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+void EasyVariableWriteWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
+void EasyVariableReadWithHandle(EasyVariableBaseInt32_t s32Handle, void* pvodDataValue);
+void EasyVariableWriteWithName(EasyVariableBaseInt8_t * ps8Description, void* pvodDataValue);
+void EasyVariableReadWithName(EasyVariableBaseInt8_t * ps8Description, void* pvodDataValue);
 EasyVariableBaseInt32_t EasyVariableGetHandle(EasyVariableBaseInt8_t * ps8Description);
 
 #endif

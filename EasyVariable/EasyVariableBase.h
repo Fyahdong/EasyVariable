@@ -15,6 +15,11 @@
 #include "EasyVariableConfig.h"
 
 /**********************************************************************************/
+								/* macro */
+/**********************************************************************************/
+#define EasyVariableBase_Assert(bFlag, Return)			if(bFlag){return Return;}
+
+/**********************************************************************************/
 								/* variable type */
 /**********************************************************************************/
 typedef float EasyVariableBaseFloat_t;
@@ -66,8 +71,8 @@ extern const EasyVariableBaseDataStruct gtsEasyVariableDataArray[EasyVariable_Da
 /**********************************************************************************/
 								/* function declaration */
 /**********************************************************************************/
-void EasyVariableBaseWrite(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
-void EasyVariableBaseRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue);
+void EasyVariableBaseWrite(EasyVariableBaseInt32_t u32DataIndex, void* pvodDataValue);
+void EasyVariableBaseRead(EasyVariableBaseInt32_t u32DataIndex, void* pvodDataValue);
 EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Description);
 
 #endif

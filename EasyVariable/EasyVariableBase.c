@@ -85,14 +85,18 @@ static EasyVariableBaseInt32_t EasyVariableBaseFindVariable(EasyVariableBaseInt8
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableBaseWrite(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableBaseWrite(EasyVariableBaseInt32_t s32DataIndex, void* pvodDataValue)
 {
 	void* pvDataAddress = 0;
 	EasyVariableBaseUint32_t u32DataType = 0;
 
-	/* 1 get information of variable */
-	pvDataAddress = gtsEasyVariableDataArray[u32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
+	/* 1 error check */
+	EasyVariableBase_Assert(((s32DataIndex >= EasyVariable_Data_Max_Number) || (s32DataIndex < 0)));
+	EasyVariableBase_Assert((pvodDataValue == NULL));
+
+	/* 2 get information of variable */
+	pvDataAddress = gtsEasyVariableDataArray[s32DataIndex].pvDataAddress;
+	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[s32DataIndex].teDataType);
 
 	/* 2 write value into data */
 	EasyVariableBaseMemcpy(pvDataAddress, pvodDataValue, sgu8DataTypeSizeArray[u32DataType]);
@@ -106,14 +110,18 @@ void EasyVariableBaseWrite(EasyVariableBaseUint32_t u32DataIndex, void* pvodData
  * @param[out]	None
  * @retval		None
  */
-void EasyVariableBaseRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataValue)
+void EasyVariableBaseRead(EasyVariableBaseInt32_t s32DataIndex, void* pvodDataValue)
 {
 	void* pvDataAddress = 0;
 	EasyVariableBaseUint32_t u32DataType = 0;
 
+	/* 1 error check */
+	EasyVariableBase_Assert(((s32DataIndex >= EasyVariable_Data_Max_Number) || (s32DataIndex < 0)));
+	EasyVariableBase_Assert((pvodDataValue == NULL));
+
 	/* 1 get information of variable */
-	pvDataAddress = gtsEasyVariableDataArray[u32DataIndex].pvDataAddress;
-	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[u32DataIndex].teDataType);
+	pvDataAddress = gtsEasyVariableDataArray[s32DataIndex].pvDataAddress;
+	u32DataType = (EasyVariableBaseUint32_t)(gtsEasyVariableDataArray[s32DataIndex].teDataType);
 
 	/* 2 get value from data */
 	EasyVariableBaseMemcpy(pvodDataValue, pvDataAddress, sgu8DataTypeSizeArray[u32DataType]);
@@ -128,5 +136,7 @@ void EasyVariableBaseRead(EasyVariableBaseUint32_t u32DataIndex, void* pvodDataV
  */
 EasyVariableBaseInt32_t EasyVariableBaseGetHandle(EasyVariableBaseInt8_t* ps8Description)
 {
+	EasyVariableBase_Assert((ps8Description == NULL));
+
 	return EasyVariableBaseFindVariable(ps8Description);
 }
